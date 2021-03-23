@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';  //libreria importata
 import { SocketService } from './socket.service';
+import { CesarService } from './cesar.service';
 
 const config: SocketIoConfig = { url: 'https://3000-fuchsia-ptarmigan-czdb56lc.ws-eu03.gitpod.io', options: {} };  //url del server
 
@@ -14,7 +15,7 @@ const config: SocketIoConfig = { url: 'https://3000-fuchsia-ptarmigan-czdb56lc.w
     BrowserModule,
     SocketIoModule.forRoot(config), //anche qui
   ],
-  providers: [SocketService],
+  providers: [SocketService, CesarService],  //aggiunti i service
   bootstrap: [AppComponent]
 })
 export class AppModule { }
