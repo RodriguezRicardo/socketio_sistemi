@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { SocketService } from './socket.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,7 @@ export class AppComponent {
   title = 'client-socketio';
 
   messageList:  string[] = [];
+  obsMess : Observable<Object>;
 
   constructor(private socketService: SocketService) {
   }
@@ -22,10 +24,12 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    this.socketService.getMessage()
-      .subscribe((message: string) => {
-        this.messageList.push(message);
-        console.log("messagereceived: " + message)
-      });
+    this.obsMess = this.socketService.getMessage();
+    this.obsMess.subscribe(this.rcvMessage);
+  }
+
+  rcvMessage = (message: string) => {
+    this.messageList.push(message);
+    console.log("messagereceived: " + message)
   }
 }
