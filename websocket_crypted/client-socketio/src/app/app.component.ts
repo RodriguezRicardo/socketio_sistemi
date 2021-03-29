@@ -21,7 +21,7 @@ export class AppComponent {
   sendMessage(message: HTMLInputElement) {
     let encoded = this.cesarService.encode(message.value, 10);
     this.socketService.sendMessage(encoded);
-    //console.log("sent: " + message.value)
+    console.log("sent: " + message.value)
     message.value="";
   }
 
@@ -31,7 +31,10 @@ export class AppComponent {
   }
 
   rcvMessage = (message: string) => {
-    this.messageList.push(message);
-    console.log("messagereceived: " + message)
+    let decoded = this.cesarService.decode(message, 10)  //decripto
+
+    this.messageList.push(decoded);
+    console.log("messagereceived: " + decoded)
   }
+
 }
