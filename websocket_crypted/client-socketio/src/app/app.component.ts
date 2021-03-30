@@ -11,7 +11,8 @@ import { CesarService } from './cesar.service';
 export class AppComponent {
   title = 'client-socketio';
 
-  messageList:  string[] = [];
+  messageList:  string[] = [];   //lista per messaggi criptati
+  messDecifrati: string[] = [];  //lista per messaggi decifrati
   obsMess : Observable<Object>;
 
 
@@ -31,10 +32,13 @@ export class AppComponent {
   }
 
   rcvMessage = (message: string) => {
-    let decoded = this.cesarService.decode(message, 10)  //decripto
+    this.messageList.push(message);
 
-    this.messageList.push(decoded);
-    console.log("messagereceived: " + decoded)
+    let decoded = this.cesarService.decode(message, 10)  //decripto
+    this.messDecifrati.push(decoded);                    //aggiungo alla lista il messaggio decifrato
+
+    console.log("messagereceived: " + message)
+    console.log("messaggio cifrato: " + message + " e messaggio decifrato: " + decoded)
   }
 
 }

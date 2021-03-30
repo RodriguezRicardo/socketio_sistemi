@@ -2,6 +2,10 @@
 
 <button (click)="sendMessage(message)">Send Message</button>
 
-<div *ngFor = "let message of messageList">
-  {{message}}
+<div *ngFor = "let messaCifr of messageList">
+  <p>messaggio cifrato: {{messaCifr}}</p>
+</div>
+
+<div *ngFor = "let messaDecifr of messDecifrati">
+  <p>messaggio decifrato: {{messaDecifr}}</p>
 </div>
