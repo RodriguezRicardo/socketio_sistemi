@@ -15,12 +15,13 @@ export class AppComponent {
   messDecifrati: string[] = [];  //lista per messaggi decifrati
   obsMess : Observable<Object>;
 
+  encryptionKEY: string;
 
   constructor(private socketService: SocketService, private cesarService: CesarService) {
   }
 
   sendMessage(message: HTMLInputElement) {
-    let encoded = this.cesarService.encode(message.value, 10);
+    let encoded = this.cesarService.encode(message.value, Number(this.encryptionKEY));
     this.socketService.sendMessage(encoded);
     console.log("sent: " + message.value)
     message.value="";
@@ -34,11 +35,15 @@ export class AppComponent {
   rcvMessage = (message: string) => {
     this.messageList.push(message);
 
-    let decoded = this.cesarService.decode(message, 10)  //decripto
+    let decoded = this.cesarService.decode(message, Number(this.encryptionKEY))  //decripto
     this.messDecifrati.push(decoded);                    //aggiungo alla lista il messaggio decifrato
 
     console.log("messagereceived: " + message)
     console.log("messaggio cifrato: " + message + " e messaggio decifrato: " + decoded)
   }
 
+  //metodo per dire che il mio valore che scelgo è la chiave
+  setEncryption(offset : HTMLInputElement) {
+    this.encryptionKEY = offset.value;
+  }
 }
