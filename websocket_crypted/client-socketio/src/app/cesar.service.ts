@@ -6,17 +6,18 @@ import { Injectable } from '@angular/core';
 export class CesarService {
   decode(encoded:string, offset:number) : string
   {
-    var plainText = "";  //stringa che continene il testo decriptato
-    for(var i = 0; i < encoded.length; i++) {
-      var encryptedChar = encoded.charCodeAt(i);
-      if(encryptedChar >= 97 && encryptedChar <= 122) {
-        plainText += String.fromCharCode((encryptedChar-97 - offset + 26) %26 + 97 );
-      }
-      else if(encryptedChar >= 65 && encryptedChar <= 90) {
-        plainText += String.fromCharCode((encryptedChar-65 - offset + 26) %26 + 65 );
-      }
+    let charArray = Array.from(encoded);
+    let encodedArray = [];
+
+    for (const char of charArray) {
+      let charCode = char.charCodeAt(0);
+
+      let newChar = String.fromCharCode(charCode - offset)
+      encodedArray.push(newChar);
     }
-    return plainText;
+
+    //Trasformo l'encoded array in una stringa
+    return encodedArray.join('');
   }
 
   encode(toEncode:string, offset:number) : string
