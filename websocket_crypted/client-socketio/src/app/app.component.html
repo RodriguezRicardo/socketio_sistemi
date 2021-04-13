@@ -18,7 +18,7 @@
 <div>
   <input (keyup)="$event.keyCode == 13 && setEncryptionKey(encKey)" #encKey />
   <button (click)="setEncryptionKey(encKey)">Set Encryption Key</button>
-  ecryption key: {{encryptionKey}}
+  encryption key: {{encryptionKey}}
 </div>
 
 <hr>
@@ -33,6 +33,11 @@
   <div>
     <input id="t-des" type="radio" value="t-des" name="messageType" ngModel>
     <label for="t-des">Triple Des</label>
+  </div>
+
+  <div>
+    <input type="aes" type="radio" value="aes" name="messageType" ngModel>
+    <label for="aes">AES</label>
   </div>
 
   <input type="text" id="message"  [(ngModel)]="message" name="message">

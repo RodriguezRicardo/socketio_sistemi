@@ -7,7 +7,7 @@ import { CesarService } from './cesar.service';
 import { CryptoService } from './crypto.service';
 import { FormsModule } from '@angular/forms';
 
-const config: SocketIoConfig = { url: 'https://3000-gold-leech-xvh1zjoq.ws-eu03.gitpod.io', options: {} };  //url del server
+const config: SocketIoConfig = { url: 'https://3000-salmon-pelican-6w7si3qh.ws-eu03.gitpod.io', options: {} };  //url del server
 
 @NgModule({
   declarations: [

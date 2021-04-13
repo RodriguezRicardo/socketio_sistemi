@@ -36,6 +36,10 @@ export class AppComponent {
       case "t-des":
         encoded.message = this.cryptoService.encodeDes(formData.message, this.encryptionKey);
         break;
+
+      case "aes":
+        encoded.message = this.cryptoService.encodeAes(formData.message, this.encryptionKey);
+        break;
     }
     //Invio il messaggio cifrato
     this.socketService.sendMessage(JSON.stringify(encoded));
@@ -59,6 +63,10 @@ export class AppComponent {
 
       case "t-des":
         received.message = this.cryptoService.decodeDes(received.message, this.encryptionKey);
+        break;
+
+      case "aes":
+        received.message = this.cryptoService.decodeAes(received.message, this.encryptionKey);        //aggiunto caso cifratura AES
         break;
     }
 
